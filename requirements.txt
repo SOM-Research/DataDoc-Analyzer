@@ -129,7 +129,6 @@ mdit-py-plugins==0.3.3
 mdurl==0.1.2
 mf2py==1.1.2
 mistune==2.0.4
-mlflow==2.0.1
 mmh3==3.0.0
 monotonic==1.6
 more-itertools==9.0.0
