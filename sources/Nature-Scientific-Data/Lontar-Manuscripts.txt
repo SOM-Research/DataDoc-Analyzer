@@ -1,0 +1,146 @@
+
+DeepLontar dataset for handwritten Balinese character detection and syllable recognition on Lontar manuscript
+
+Daniel Siahaan , Ni Putu Sutramiani, Nanik Suciati, I Nengah Duija, I Wayan Agus Surya Darma
+
+
+The digitalization of traditional Palmyra manuscripts, such as Lontar, is the government’s main focus
+in efforts to preserve Balinese culture. Digitization is done by acquiring Lontar manuscripts through
+photos or scans. To understand Lontar’s contents, experts usually carry out transliteration. Automatic
+transliteration using computer vision is generally carried out in several stages: character detection,
+character recognition, syllable recognition, and word recognition. Many methods can be used for
+detection and recognition, but they need data to train and evaluate the resulting model. In compiling
+the dataset, the data needs to be processed and labelled. This paper presented data collection and
+building datasets for detection and recognition tasks. Lontar was collected from libraries at universities
+in Bali. Data generation was carried out to produce 400 augmented images from 200 Lontar original
+images to increase the variousness of data. Annotations were performed to label each character
+producing over 100,000 characters in 55 character classes. This dataset can be used to train and evaluate
+performance in character detection and syllable recognition of new manuscripts.
+
+Background & Summary: Ancient manuscript digitization is a necessary process to support the preservation of cultural heritage to avoid
+document destruction. The digitization process is carried out through the acquisition of ancient manuscript
+documents into digital images. Then, digital images can be further processed through the computer vision
+method to extract the information in the ancient manuscript document. Balinese Lontar manuscript is a historical document used by ancient people in Bali to store important information related to ancient science, such as
+traditional medicine, farming techniques, determining auspicious days, and others.
+In the ancient Balinese community, traditions, instructions, and drugs ingredients were documented by
+officials or scholars as Lontar manuscripts in Balinese characters. The writing process on the Balinese Lontar
+manuscript uses a special knife called a pengrupak on dried palm leaves. Then, roasted candlenut powder is
+used to give colour to the written Balinese characters. Balinese writers did the writing of Lontar to store various important information in ancient times. The Balinese characters used have unique writing characteristics.
+Characters are written without spaces. There are combinations of characters to form syllables, dense and overlapping characters, and sticking together. DeepLontar dataset can be used for syllables recognition by combining
+each character by applying special rules. This dataset is very challenging because it can only be read and translated by experts.
+Balinese Lontar publicly available datasets are available on a very limited basis. Therefore, related research
+has been carried out for assembling datasets for Balinese Lontar manuscripts. Windu et al.1 proposed AMADI_
+LontarSet that consists of bi-level images as gold standard dataset, image datasets with word-level annotations
+and isolated glyphs. The resulting performance is only below 50% due to the use of isolated character images,
+which do not label every character in the Balinese Lontar manuscript. Other studies related to Balinese characters have been carried out, starting with Balinese character segmentation2, Balinese character recognition3,
+Balinese character augmentation in increasing data variation4, and Balinese character detection based on deep
+learning5. In the case of ancient Chinese documents, two main datasets were proposed. The datasets were
+annotated with characters, including gold-standard character bounding boxes and its corresponding glyphs6.
+Furthermore, a new augmentation method was introduced based on the fusion of general transfiguration with
+local deformation and successfully enlarged the training dataset7. In the case of Indian documents, thorough
+experimentations were performed on other corpus comprising in print and in-writing texts8. Other studies
+proposed the IFN/ENIT dataset to surmount the dearth of Arabic datasets easily accessible for researchers9 and
+a popular literature Arabic/English dataset: Everyday Arabic-English Scene Text dataset (EvArEST) for Arabic
+text recognition10. Other researchers proposed Ekush dataset for Bangla handwritten text recognition11, Tamil
+dataset for in-writing Tamil character recognition utilizing deep learning12,13, DIDA dataset for detection and
+recognize in-writing numbers in ancient manuscript drawings dated from the nineteen century14.
+Based on previous research, we proposed DeepLontar, a dataset for handwritten Balinese character detection
+and syllable recognition on the Lontar manuscript. DeepLontar consists of 600 images of the Balinese Lontar
+manuscript that have been annotated and validated by experts. This dataset was built through the process of
+acquisition (200 original images), data generation (400 augmented images), data annotation, and expert validation. This dataset has been tested on the detection and recognition process of Balinese characters using the
+YOLOv4 model. The original dataset was split into train and test data with distribution ratio of 60%:40%. Three
+datasets were prepared. The first dataset, i.e. the original dataset, was split into 120 original images in the train
+data and 80 original images in the test data. In the second dataset, 200 augmented images (produced by the
+grayscale augmentation technique) were added into the train data. In the third dataset, another 200 augmented
+images (produced by adaptive gaussian thresholding technique) were added into the train data. In those three
+dataset, the YOLOv4 model produces a detection performance with mean average precision (mAP) of up to
+99.55% with precision, recall, and F1-score are 99%, 100%, and 99%, respectively5. DeepLontar consists of 55
+Balinese character classes. These classes are used in writing Balinese script in Lontar Manuscripts. The entire
+vocabulary in the DeepLontar dataset uses these 55-character classes. DeepLontar have been annotated and
+validated by experts.
+Each annotated character class has a high variation because it is written using a pengrupak, and the characters
+are handwritten. The high character variation makes this dataset very challenging for detecting and recognizing
+syllables in Balinese Lontar manuscripts. Figure 1 shows a sample image of Balinese lontar manuscript. The
+Balinese character classes that have been annotated in the Balinese Lontar manuscript.
+The lontar manuscripts are written using Balinese characters. The writing uses a special knife called pengrupak by scraping dry palm leaves so that Balinese characters are engraved on the manuscript. The coloring
+process uses roasted candlenut powder, making the engraved characters black.
+Figure 2 shows the acquisition process of Balinese Lontar manuscripts. It is carried out using a scanner.
+This process is carried out on 200 pieces of Balinese Lontar manuscript. To enrich the variety and increase the
+amount of data, we apply data generation using augmentation techniques. Based on the data generation process,
+we produced 400 augmented images of the Balinese Lontar manuscript. Figure 3 shows variations of the Balinese
+Lontar manuscript image in the DeepLontar dataset.
+Figure 4 shows an annotated image of the Balinese Lontar manuscript. The annotation process uses LabelImg
+by labeling each Balinese character. Then, it aims to label the Balinese character class and position in the Balinese
+Lontar manuscript. We have tested the DeepLontar dataset using a deep learning architecture for detecting and
+recognizing Balinese characters in the Balinese Lontar manuscript shown in Fig. 5. In general, each character has
+been successfully detected, and its class recognized accurately with a confidence level of 99%. Figure 6 Examples
+of Balinese character detection and recognition results in DeepLontar dataset.
+
+
+
+Methods: The process of compiling the dataset was carried out in four stages. Each stage was shown in Fig. 5, starting with
+data acquisition, data generation, data annotation, and validation. The first stage was data acquisition by scanning the Lontar manuscript using a scanner. Figure 3 shows the scan process per sheet of Lontar manuscripts.
+The Lontar manuscript was scanned in a horizontal position according to the characteristics of the elongated
+Lontar. This process produced 200 Lontar images. Furthermore, the second stage was to perform data generation
+with two augmentation techniques. The augmentation technique used grayscale and adaptive gaussian thresholding for increasing the variety of data. The grayscale augmentation is used in order for the model to put lesser
+importance on colour as a signal. The adaptive gaussian thresholding is utilized to sharpen the character image.
+This process produced 400 augmented images, which have been enhanced. Overall, the number of initial images
+and the augmented images of Lontar manuscript was 600 images. Table 1 shows he complete character set of
+Balinese character classes in DeepLontar dataset. It also shows the average precisions of character detection
+model trained on original dataset (ori) and trained on augmented dataset (aug). It indicates that the augmentation technique does improve the average precision (AP).
+Although DeepLontar dataset does contain out of vocabulary classes, it suffers from imbalance problem. The
+da madu class rarely appear in the dataset. As we can see in Table 1, the augmentation technique helps improves
+the average precision of the detection model.
+
+The third stage was character annotation using the LabelImg application. The Balinese character originally
+consists of 75 character classes, but not all character classes are used in writing lontar manuscript. Therefore, to
+determine the number of character classes, we have involved experts in determining the character classes that
+are often used in writing Lontar manuscript. Image annotation was done to label the image, which was used as
+ground truth. The bounding box was used to annotate each character. This process was carried out by a team and
+accompanied by experts. Character annotations produced 102,966 characters came from 55 character classes.
+The annotation results stored the spatial location of each character object within the observed image. The character class is annotated with the bounding box, its spatial location, and its two-dimensional size. Balinese character annotation in the Lontar manuscript produced a new Balinese character dataset for identifying Balinese
+glyphs called DeepLontar. The last stage was data validation. Based on the result of our experimentation, the
+dataset was able to produce up to 99.55% performance.
+
+
+Data Records: DeepLontar dataset is freely accessible to the researchers at Figshare15. DeepLontar consisted of 600 images of
+Balinese Lontar manuscripts and additionally, 600 *.txt files that stored information related to data annotations
+in YOLO format. Balinese character annotations in DeepLontar consisted of more than 100,000 characters that
+experts had validated. All files are named in the following format:
+• JPEG images: < filename > .jpg, for instance: 1a.jpg, and
+• TXT annotations: < filename > .txt, for instance: 1a.txt,
+Annotation files format follows the YOLO format, as follow:
+• <ID> <x> <y> <width> <height>, for instance: 54 0.068000 0.083333 0.016000 0.073333
+where <ID> is the object class ID, <x> is x coordinate, <y> is y coordinate, <width> is width of the bounding box, and <height> is heigh of the bounding box. Table 1 shows 55 Balinese character classes.
+
+Technical Validation: Data validation was carried out in two ways: validation from experts and testing using one of the deep learning
+methods, namely YOLO. Validation by experts was carried out when making ground truth of Balinese characters in Lontar manuscripts. The second validation was a trial with detecting and recognizing Balinese characters
+using YOLO.
+
+Usage Notes: DeepLontar dataset images are published and bundled into one compressed file (.zip) named DeepLontar.zip.
+The annotation files are published and bundled into one compressed file (.zip) named DeepLontar_labels.zip.
+
+Code availability: The images data are available at Figshare repository15 and data augmentation code are available using OpenCV
+library. Data annotation tool using LabelImg is available online16.
+Received: 7 July 2022; Accepted: 17 November 2022;
+
+Acknowledgements: The study is supported by the Directorate General of Higher Education, Ministry of Education and Culture
+Republic of Indonesia under grant number 1564/PKS/ITS/2022.
+
+Author contributions: D.S. and N.S.: supervision, funding acquisition, project administration, review and editing.
+
+Open Access: This article is licensed under a Creative Commons Attribution 4.0 International
+License, which permits use, sharing, adaptation, distribution and reproduction in any medium or
+format, as long as you give appropriate credit to the original author(s) and the source, provide a link to the Creative
+Commons license, and indicate if changes were made. The images or other third party material in this
+article are included in the article’s Creative Commons license, unless indicated otherwise in a credit line to the
+material. If material is not included in the article’s Creative Commons license and your intended use is not permitted
+by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the
+copyright holder. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/.
+
+Table 1: This table contains information about the DeepLontar dataset for handwritten Balinese character detection and syllable recognition on Lontar manuscript. The table contains two columns, Character Classes and Freq, which list the character classes and their respective frequencies. The table also contains two columns, AP (%) and AP (%), which list the average precision of the character detection model trained on the original dataset (ori) and trained on the augmented dataset (aug). The table also contains two additional columns, Unnamed: 0 and Unnamed: 1, which list the average precision of the character detection model trained on the original dataset and the augmented dataset, respectively.
+
+
+Table 2: This table contains information about the DeepLontar dataset for handwritten Balinese character detection and syllable recognition on Lontar manuscript. The table contains two columns, Character Classes and Freq, which list the different character classes and their respective frequencies. The table also contains two columns, AP (%) and AP (%).1, which list the average precisions of character detection models trained on the original dataset (ori) and trained on the augmented dataset (aug). The table also contains two unnamed columns.
+
+

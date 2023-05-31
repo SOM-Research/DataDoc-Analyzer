@@ -27,8 +27,8 @@ LLMClient = OpenAI(model_name='text-davinci-003', openai_api_key=openai.api_key,
 def extract_text_from_pdf(file_path):
     article_dict = scipdf.parse_pdf_to_dict(file_path, soup=True,return_coordinates=False, grobid_url="https://kermitt2-grobid.hf.space") # return dictionary
     print("parsed")
-    source = article_dict.find("sourcedesc")
-    authors = source.find_all("persname")
+    #source = article_dict.find("sourcedesc")
+    #authors = source.find_all("persname")
     finaltext = article_dict['title'] + " \n\n " + article_dict['authors'] + " \n\n Abstract: " + article_dict['abstract'] + " \n\n "
     sections = []
     for section in article_dict['sections']:
