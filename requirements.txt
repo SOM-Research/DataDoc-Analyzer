@@ -54,7 +54,6 @@ et-xmlfile==1.1.0
 executing==1.2.0
 extruct==0.14.0
 faiss-cpu==1.7.2
-farm-haystack==1.12.2
 fastapi==0.95.2
 fastjsonschema==2.16.2
 ffmpy==0.3.0
@@ -79,7 +78,6 @@ grpcio==1.50.0
 gunicorn==20.1.0
 h11==0.14.0
 h5py==3.7.0
-haystack==0.42
 html-text==0.5.2
 html5lib==1.1
 htmlmin==0.1.12
