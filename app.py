@@ -637,5 +637,5 @@ with gr.Blocks(theme=gr.themes.Soft(), css=css) as demo:
    
     # Run the app
     #demo.queue(concurrency_count=5,max_size=20).launch()
-    demo.launch(share=True,auth=("CKIM2023", "demodemo"))
+    demo.launch(auth=("CKIM2023", "demodemo"))
         
