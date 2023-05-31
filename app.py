@@ -491,7 +491,6 @@ css = """.table-wrap.scroll-hide.svelte-8hrj8a.no-wrap {
 div#component-2 h2 {
     color: var(--block-label-text-color);
     text-align: center;
-    border-bottom: 2px solid;
     border-radius: 7px;
     text-align: center;
     margin: 0 15% 0 15%;
@@ -529,7 +528,7 @@ div#component-9 {
 
 with gr.Blocks(theme=gr.themes.Soft(), css=css) as demo:
     with gr.Row():
-            gr.Markdown("## Dataset documentation analyzer")
+            gr.Markdown("## DataDoc Analyzer")
     with gr.Row():
         gr.Markdown("""Extract, in a structured manner, the **[general guidelines](https://knowingmachines.org/reading-list#dataset_documentation_practices)** from the ML community about dataset documentation practices from its scientific documentation. Study and analyze scientific data published in peer-review journals such as: **[Nature's Scientific Data](https://duckduckgo.com)** and **[Data-in-Brief](https://duckduckgo.com)**. Here you have a **[complete list](https://zenodo.org/record/7082126#.ZDaf-OxBz0p)** of data journals suitable to be analyzed with this tool.
                  """)
