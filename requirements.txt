@@ -146,7 +146,7 @@ nltk==3.7
 num2words==0.5.12
 numba==0.56.4
 numexpr==2.8.4
-numpy==1.24.3
+numpy==1.23.1
 oauthlib==3.2.2
 openai==0.27.2
 openapi-schema-pydantic==1.2.4
