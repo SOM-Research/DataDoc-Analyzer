@@ -275,7 +275,7 @@ torch==1.12.1
 torch-complex==0.4.3
 torchvision==0.14.0
 tornado==6.2
-tqdm==4.65.0
+tqdm==4.64.0
 traitlets==5.5.0
 transformers @ git+https://github.com/huggingface/transformers@main
 typeguard==2.13.3
