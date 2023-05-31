@@ -123,7 +123,7 @@ markdown2==2.4.6
 MarkupSafe==2.1.2
 marshmallow==3.19.0
 marshmallow-enum==1.5.1
-matplotlib==3.7.1
+matplotlib==3.6.1
 matplotlib-inline==0.1.6
 mdit-py-plugins==0.3.3
 mdurl==0.1.2
