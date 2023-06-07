@@ -27,8 +27,8 @@ LLMClient = OpenAI(model_name='text-davinci-003', openai_api_key=openai.api_key,
 def extract_text_from_pdf(file_path):
     article_dict = scipdf.parse_pdf_to_dict(file_path, soup=True,return_coordinates=False, grobid_url="https://kermitt2-grobid.hf.space") # return dictionary
     print("parsed")
-    #source = article_dict.find("sourcedesc")
-    #authors = source.find_all("persname")
+    source = article_dict.find("sourcedesc")
+    authors = source.find_all("persname")
     finaltext = article_dict['title'] + " \n\n " + article_dict['authors'] + " \n\n Abstract: " + article_dict['abstract'] + " \n\n "
     sections = []
     for section in article_dict['sections']:
@@ -530,13 +530,13 @@ with gr.Blocks(theme=gr.themes.Soft(), css=css) as demo:
     with gr.Row():
             gr.Markdown("## DataDoc Analyzer")
     with gr.Row():
-        gr.Markdown("""Extract, in a structured manner, the **[general guidelines](https://knowingmachines.org/reading-list#dataset_documentation_practices)** from the ML community about dataset documentation practices from its scientific documentation. Study and analyze scientific data published in peer-review journals such as: **[Nature's Scientific Data](https://duckduckgo.com)** and **[Data-in-Brief](https://duckduckgo.com)**. Here you have a **[complete list](https://zenodo.org/record/7082126#.ZDaf-OxBz0p)** of data journals suitable to be analyzed with this tool.
+        gr.Markdown("""Extract, in a structured manner, the **[general guidelines](https://knowingmachines.org/reading-list#dataset_documentation_practices)** from the ML community about dataset documentation practices from its scientific documentation. Study and analyze scientific data published in peer-review journals such as: **[Nature's Scientific Data](https://www.nature.com/sdata/)** and **[Data-in-Brief](https://www.data-in-brief.com)**. Here you have a **[complete list](https://zenodo.org/record/7082126#.ZDaf-OxBz0p)** of data journals suitable to be analyzed with this tool.
                  """)
         
     with gr.Row():
         
         with gr.Column():
-           fileinput = gr.File(label="Upload TXT file"),
+           fileinput = gr.File(label="Upload the dataset documentation"),
 
         with gr.Column():
              gr.Markdown(""" <h4 style=text-align:center>Instructions: </h4> 
@@ -560,40 +560,40 @@ with gr.Blocks(theme=gr.themes.Soft(), css=css) as demo:
     with gr.Row():
         with gr.Tab("Annotation"):
        
-            gr.Markdown("""In this chapter, we get information regarding the annotation process of the data: We provide a description of the process and we infer its type from the documentation. Then we extract the labels, and information about the annotation team, the infrastructure used to annotate the data and the validation process applied over the labels""")
+            gr.Markdown("""In this dimension, you can get information regarding the annotation process of the data: Extract a description of the process and infer its type. Extract the labels and information about the annotation team, the infrastructure used to annotate the data, and the validation process applied to the labels.""")
             result_anot = gr.DataFrame(headers=["dimension","result"],type="array",label="Results of the extraction:")
             alerts_anot = gr.DataFrame(headers=["warnings"],type="array", visible=False)
             button_annotation = gr.Button("Get the annotation process insights!")
                 
         with gr.Tab("Gathering"):
-            gr.Markdown("""In this chapter, we get information regarding the collection process of the data: We provide a description of the process and we infer its type from the documentation. Then we extract information about the collection team, the infrastructure used to collect the data and the sources. Also we get the timeframe of the data collection and its geolocalization.""")
+            gr.Markdown("""In this dimension, we get information regarding the collection process of the data: We provide a description of the process and we infer its type from the documentation. Then we extract information about the collection team, the infrastructure used to collect the data and the sources. Also we get the timeframe of the data collection and its geolocalization.""")
             result_gather = gr.DataFrame(headers=["dimension","result"],type="array",label="Results of the extraction:")
             alerts_gather = gr.DataFrame(headers=["warnings"],type="array", visible=False)
             button_gathering = gr.Button("Get the gathering process insights!")
         with gr.Tab("Uses"):
-            gr.Markdown("""In this chapter, we extract the design intentios of the authors, we extract the purposes, gaps, and we infer the ML tasks (extracted form hugginface) the dataset is inteded for. Also we get the uses recomendation and the ML Benchmarks if the dataset have been tested with them""")
+            gr.Markdown("""In this dimension, we extract the design intentios of the authors, we extract the purposes, gaps, and we infer the ML tasks (extracted form hugginface) the dataset is inteded for. Also we get the uses recomendation and the ML Benchmarks if the dataset have been tested with them""")
             result_uses = gr.DataFrame(headers=["dimension","result"],type="array",label="Results of the extraction:")
             alerts_uses = gr.DataFrame(headers=["warnings"],type="array", visible=False)
             button_uses = gr.Button("Get the uses of the dataset!")
         with gr.Tab("Contributors"):
-            gr.Markdown("""In this chapter, we extract all the contributors, funding information and maintenance of the dataset""")
+            gr.Markdown("""In this dimension, we extract all the contributors, funding information and maintenance of the dataset""")
             result_contrib = gr.DataFrame(headers=["dimension","result"],type="array",label="Results of the extraction:")
             alerts_contrib = gr.DataFrame(headers=["warnings"],type="array", visible=False)
             button_contrib = gr.Button("Get the contributors of the dataset!")
           
         with gr.Tab("Composition"):
-            gr.Markdown("""In this chapter, we extract the file structure, we identify the attributes of the dataset, the recommneded trainig splits and the relevant statistics (if provided in the documentation) """)
+            gr.Markdown("""In this dimension, we extract the file structure, we identify the attributes of the dataset, the recommneded trainig splits and the relevant statistics (if provided in the documentation) """)
             result_comp = gr.DataFrame(headers=["dimension","result"],type="array",label="Results of the extraction:")
             alerts_comp = gr.DataFrame(headers=["warnings"],type="array", visible=False)
             button_comp = gr.Button("Get the composition of the dataset!")
         with gr.Tab("Social Concerns"):
-            gr.Markdown("""In this chapter, we extract social concerns regarding the representativeness of social groups, potential biases, sensitivity issues, and privacy issues. """)
+            gr.Markdown("""In this dimension, we extract social concerns regarding the representativeness of social groups, potential biases, sensitivity issues, and privacy issues. """)
             result_social = gr.DataFrame(headers=["dimension","result"],type="array",label="Results of the extraction:")
             alerts_social = gr.DataFrame(headers=["warnings"],type="array", visible=False)
             button_social = gr.Button("Get the Social Cocerns!")
 
         with gr.Tab("Distribution"):
-            gr.Markdown("""In this chapter, we aim to extract the legal conditions under the dataset is released) """)
+            gr.Markdown("""In this dimension, we aim to extract the legal conditions under the dataset is released) """)
             result_distri = gr.DataFrame(headers=["dimension","result"],type="array",label="Results of the extraction:")
             alerts_distribution = gr.DataFrame(headers=["warning"],type="array", visible=False)
             button_dist = gr.Button("Get the Distribution!")
@@ -636,5 +636,5 @@ with gr.Blocks(theme=gr.themes.Soft(), css=css) as demo:
    
     # Run the app
     #demo.queue(concurrency_count=5,max_size=20).launch()
-    demo.launch(auth=("CKIM2023", "demodemo"))
+    demo.launch(share=False,auth=("CIKM2023", "demodemo"))
         
