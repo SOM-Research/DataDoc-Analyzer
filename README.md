@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # GitHub Best Practices Template
 
 This is **a template repository** for helping others to follow the best practices when developing GitHub projects.
@@ -44,3 +45,18 @@ The [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) license allows r
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
 
 
+=======
+---
+title: DataDoc Analyzer
+emoji: 👁
+colorFrom: green
+colorTo: green
+sdk: gradio
+sdk_version: 3.32.0
+app_file: app.py
+pinned: false
+license: apache-2.0
+---
+
+Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+>>>>>>> f120573 (initial commit)
