@@ -1,40 +1,80 @@
-<<<<<<< HEAD
-# GitHub Best Practices Template
+# DataDoc Analyzer
 
-This is **a template repository** for helping others to follow the best practices when developing GitHub projects.
 
-You will find a collection of files and configuration recommendations for kick-starting a new project in GitHub. 
 
-You can start by following the instructions at the [guidelines](guidelines.md) file.
+Extract, in a structured manner, the **[general guidelines](https://knowingmachines.org/reading-list#dataset_documentation_practices)** from the ML community about dataset documentation practices from its scientific documentation. Study and analyze scientific data published in peer-review journals such as: **[Nature's Scientific Data](https://www.nature.com/sdata/)** and **[Data-in-Brief](https://www.data-in-brief.com)**. 
 
-## ⚒️ Using this template for your project
+Here you have a **[complete list](https://zenodo.org/record/7082126#.ZDaf-OxBz0p)** of data journals suitable to be analyzed with this tool. Test the web UI of the tool in the following **[HuggingFace Space](https://huggingface.co/spaces/JoanGiner/DataDoc_Analyzer)**
 
-To use this template, you can create a new repository by clicking on _Use this template_ button. 
 
-The new repository will use this one as a template, meaning that it will contain all the files. 
-Once the new repository is created, you can edit its files to adapt them to your needs.
+## ⚒️ Installation
 
-## ☑️ Guidelines & Contributing
+The tools comes with two UI's. A web app built with gradio inteded to test the capabilities of the tool and to analyze a single document (you can test it in the HuggingFace Space). And, a API built with FastAPI, suited to be integrated in any ML pipeline:
 
-You will find a guided description of the steps you should follow in the [guidelines](guidelines.md) file.
+To use this tool you need to have **python3.10**, **git**, and **pip** installed in your system.
 
-Please, read carefully the guidelines and adapt them to your needs.
+Then just:
+```
+git clone https://github.com/JoanGi/DataDoc-Analyzer.git datadoc
 
-If you find any issue or have any suggestion, please, feel free to open an issue. Just remember that:
+## Enter to the created folder
+cd datadoc
 
-1. Anyone participating will be subject to and agrees to sign on to the [Code of Conduct](CODE_OF_CONDUCT.md).
+## Install dependencies
+## Better to do this in a virtual enviroment
+pip install -r requirements.txt
+```
+To deploy the web UI:
+```
+python3 app.py
+```
+To deploy the API:
+```
+uvicorn api:app 
+```
 
-2. The development and community management of this project follows the governance rules described in the [GOVERNANCE.md](GOVERNANCE.md) document.
 
-## 📚 References
 
-During the development of this template, I have been working with the following resources:
-* [Recommended Practices for Hosting and Managing Open Source Projects on GitHub](https://www.linuxfoundation.org/research/hosting-os-projects-on-github)
-* [The role of foundations in open source projects](https://doi.org/10.1145/3183428.3183438)
-* [Contributor Covenant](https://www.contributor-covenant.org/version/2/1/code_of_conduct)
-* [Mozilla’s code of conduct enforcement ladder](https://github.com/mozilla/diversity)
-* [SustainOSS Code of Conduct](https://sustainoss.org/code-of-conduct/)
-* [CommunityRule](https://communityrule.info/)
+## ☑️ Usage
+
+### Web UI
+
+To use this tool you need to provide your own API key form OpenAI. 
+
+Once setted, you can upload your PDF from one of the scientífic journals suited for this tool[^1]. Keep en mind, that we analyze "data papers", other publication's type present in these journals, such as "meta-analysis", will not work properly.
+
+At last, click in "get insights" of any tab and you will get the results together with the completeness report.
+
+
+[^1]: Some journals that publish data papers:
+ **[Nature's Scientific Data](https://www.nature.com/sdata/)**, **[Data-in-Brief](https://www.data-in-brief.com)**, **[Geoscience Data Journal](https://rmets.onlinelibrary.wiley.com/journal/20496060)** etc... Here you have a **[complete list](https://zenodo.org/record/7082126#.ZDaf-OxBz0p)** of data journals suitable to be analyzed with this tool
+
+ <div align="center" style="width:100%">
+
+![Api showcase](./assets/appshort.gif)
+
+
+
+</div>
+
+ ### API
+
+ The API imitates the behaivour of the tabs of the web UI, but you also have an endpoints to retrieve all the dimensions at the same time. The swagger documentation of the API, that can be tried in-situ, is published together with the app. The server will start at port 8000 by default (if not occupied by other app of your system). And the documentation will be found at http://127.0.0.1:8000/docs
+
+
+<div align="center" style="width:100%">
+
+![Api showcase](./assets/apigif.gif)
+
+
+
+</div>
+
+## 📚 Background research
+
+This tool is currently under a review process.
+
+
 
 ## ⚖️ License
 
@@ -45,18 +85,3 @@ The [CC BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) license allows r
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
 
 
-=======
----
-title: DataDoc Analyzer
-emoji: 👁
-colorFrom: green
-colorTo: green
-sdk: gradio
-sdk_version: 3.32.0
-app_file: app.py
-pinned: false
-license: apache-2.0
----
-
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
->>>>>>> f120573 (initial commit)
