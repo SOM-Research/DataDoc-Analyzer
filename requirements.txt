@@ -33,6 +33,7 @@ gradio==3.32.0
 gradio_client==0.2.5
 h11==0.14.0
 httpcore==0.17.2
+httptools==0.5.0
 httpx==0.24.1
 huggingface-hub==0.14.1
 idna==3.4
@@ -86,7 +87,7 @@ PyYAML==6.0
 regex==2023.5.5
 requests==2.31.0
 requirements-parser==0.5.0
-scipdf @ git+https://github.com/titipata/scipdf_parser@master
+scipdf==0.1.dev0
 semantic-version==2.10.0
 six==1.16.0
 smart-open==6.3.0
@@ -116,7 +117,9 @@ typing_extensions==4.6.2
 uc-micro-py==1.0.2
 urllib3==2.0.2
 uvicorn==0.22.0
+uvloop==0.17.0
 Wand==0.6.11
 wasabi==1.1.1
+watchfiles==0.19.0
 websockets==11.0.3
 yarl==1.9.2

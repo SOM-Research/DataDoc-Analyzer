@@ -17,7 +17,7 @@ import asyncio
 from transformers import pipeline
 from dotenv import load_dotenv
 import json
-from extractor import Extractor
+from src.extractor import Extractor
 load_dotenv()
 
 ## You api key from vendors or hugginface
@@ -51,23 +51,18 @@ async def extraction(input_file, apikey, dimension):
     return results, completeness_report
 
 async def ui_extraction(input_file, apikey, dimension):
-        results, completeness_report = await extraction(input_file, apikey, dimension)
+        file_name = input_file.name.split("/")[-1]
+        results, completeness_report = await extractor.extraction(file_name, input_file.name, apikey, dimension)
         # Build results in the correct format for the Gradio front-end
         results = pd.DataFrame(results, columns=['Dimension', 'Results'])
         return results, gr.update(value=pd.DataFrame(completeness_report['report'],columns=['Completeness report: '+str(completeness_report['completeness'])+'%']), visible=True)
 
-async def api_extraction(input_file, apikey, dimension):
-    results, completeness_report = extraction(input_file, apikey, dimension)
-    response_results = results.to_dict()
-    response_alarms = completeness_report['value'].to_dict()
-    api_answer = {'results':response_results, 'warnings': response_alarms}
-    return api_answer
-
 async def complete(input_file):
+    file_name = input_file.name.split("/")[-1]
     # Build the chains
     chain_incontext, chain_table = extractor.build_chains(apikey=os.getenv("OPEN_AI_API_KEY")) 
     # Prepare the data
-    docsearch = await extractor.prepare_data(input_file, chain_table, apikey=os.getenv("OPEN_AI_API_KEY"))
+    docsearch = await extractor.prepare_data(file_name, input_file.name, chain_table, apikey=os.getenv("OPEN_AI_API_KEY"))
     #Retrieve dimensions    
     results = await asyncio.gather(extractor.get_annotation_dimension(docsearch,chain_incontext, retrieved_docs=10),
                                     extractor.get_gathering_dimension(docsearch,chain_incontext, retrieved_docs=10),
@@ -78,10 +73,12 @@ async def complete(input_file):
                                     extractor.get_distribution_dimension(docsearch,chain_incontext, retrieved_docs=10))
     # Get completeness report from the results
     warnings = []
+    extracts = []
     for result in results:
-        warnings.append(gr.update(value=[extractor.postprocessing(result)], visible=True))
-    results.extend(warnings)
-    return results
+        extracts.append(result[0])
+        warnings.append(gr.update(value=pd.DataFrame(result[1]['report'],columns=['Completeness report: '+str(result[1]['completeness'])+'%']), visible=True))
+    extracts.extend(warnings)
+    return extracts
 
 ## Building the layout of the app
 css = """.table-wrap.scroll-hide.svelte-8hrj8a.no-wrap {
@@ -233,20 +230,20 @@ with gr.Blocks(theme=gr.themes.Soft(), css=css) as demo:
    
 
     ## API endpoints
-    api_annotation = gr.Button(visible=False)
-    api_annotation.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="annotation")],outputs=[result_anot,alerts_anot], api_name="annotation")
-    api_gathering = gr.Button(visible=False)
-    api_gathering.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="gathering")],outputs=[result_anot,alerts_anot], api_name="gathering")
-    api_uses = gr.Button(visible=False)
-    api_uses.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="uses")],outputs=[result_anot,alerts_anot], api_name="uses")
-    api_contrib = gr.Button(visible=False)
-    api_contrib.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="contrib")],outputs=[result_anot,alerts_anot], api_name="contrib")
-    api_comp = gr.Button(visible=False)
-    api_comp.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="comp")],outputs=[result_anot,alerts_anot], api_name="composition")
-    api_social = gr.Button(visible=False)
-    api_social.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="social")],outputs=[result_anot,alerts_anot], api_name="social")
-    api_dist = gr.Button(visible=False)
-    api_dist.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="dist")],outputs=[result_anot,alerts_anot], api_name="dist")
+    #api_annotation = gr.Button(visible=False)
+    #api_annotation.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="annotation")],outputs=[result_anot,alerts_anot], api_name="annotation")
+    #api_gathering = gr.Button(visible=False)
+    #api_gathering.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="gathering")],outputs=[result_anot,alerts_anot], api_name="gathering")
+    #api_uses = gr.Button(visible=False)
+    #api_uses.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="uses")],outputs=[result_anot,alerts_anot], api_name="uses")
+   # api_contrib = gr.Button(visible=False)
+   # api_contrib.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="contrib")],outputs=[result_anot,alerts_anot], api_name="contrib")
+    #api_comp = gr.Button(visible=False)
+    #api_comp.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="comp")],outputs=[result_anot,alerts_anot], api_name="composition")
+    #api_social = gr.Button(visible=False)
+    #api_social.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="social")],outputs=[result_anot,alerts_anot], api_name="social")
+    #api_dist = gr.Button(visible=False)
+    #api_dist.click(api_extraction,inputs=[fileinput[0],apikey_elem,gr.State(value="dist")],outputs=[result_anot,alerts_anot], api_name="dist")
 
     #button_complete.click(api_extraction,inputs=[fileinput[0],apikey_elem,"annotation"],outputs=allres, api_name="annotation")
     #button_complete.click(api_extraction,inputs=[fileinput[0],apikey_elem,"annotation"],outputs=allres, api_name="annotation")
