@@ -140,17 +140,21 @@ with gr.Blocks(theme=gr.themes.Soft(), css=css) as demo:
         with gr.Column():
              gr.Markdown(""" <h4 style=text-align:center>Instructions: </h4> 
      
-         <b>  &#10549; Try the examples </b> at the bottom 
+        <b>  &#10549; Try the examples </b> at the bottom 
 
+         <b> then </b>
+
+ 
          <b> &#8680; Set your API key </b> of OpenAI  
         
          <b> &#8678; Upload </b> your data paper (in PDF or TXT)
 
          <b> &#8681; Click in get insights  </b> in one tab!
 
+
          """)
         with gr.Column():
-            apikey_elem = gr.Text(label="Your OpenAI API key")
+            apikey_elem = gr.Text(label="OpenAI API key (Not needed during review)")
          #   gr.Markdown(""" 
          #                   <h3> Improving your data and assesing your dataset documentation </h3>
          #                   The generated warning also allows you quicly check the completeness of the documentation, and spotting gaps in the document
@@ -257,5 +261,5 @@ with gr.Blocks(theme=gr.themes.Soft(), css=css) as demo:
    
     # Run the app
     #demo.queue(concurrency_count=5,max_size=20).launch()
-    demo.launch(share=False,auth=("CIKM2023", "demodemo"))
+    demo.launch(share=False,show_api=False,auth=("CIKM2023", "demodemo"))
         
