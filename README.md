@@ -24,15 +24,15 @@ cd datadoc
 ## Install dependencies (Better to do this in a virtual enviroment)
 pip install -r requirements.txt
 ```
-To deploy the web UI:
+##### Run the web UI:
 ```
 python3 app.py
 ```
-To deploy the API:
+##### Run the API:
 ```
 uvicorn api:app 
 ```
-To deploy the API using the docker image:
+##### Run the API using the docker image:
 
 First you need to install **docker** in your sistem. Then:
 
