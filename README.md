@@ -4,24 +4,24 @@
 
 Extract, in a structured manner, the **[general guidelines](https://knowingmachines.org/reading-list#dataset_documentation_practices)** from the ML community about dataset documentation practices from its scientific documentation. Study and analyze scientific data published in peer-review journals such as: **[Nature's Scientific Data](https://www.nature.com/sdata/)** and **[Data-in-Brief](https://www.data-in-brief.com)**. 
 
-Here you have a **[complete list](https://zenodo.org/record/7082126#.ZDaf-OxBz0p)** of data journals suitable to be analyzed with this tool. Test the web UI of the tool in the following **[HuggingFace Space](https://huggingface.co/spaces/JoanGiner/DataDoc_Analyzer)**
+Here you have a **[complete list](https://zenodo.org/record/7082126#.ZDaf-OxBz0p)** of data journals suitable to be analyzed with this tool. Test the web UI of the tool in the following **[HuggingFace Space](https://huggingface.co/spaces/JoanGiner/DataDoc_Analyzer)**, and the API using our **[Docker image](https://hub.docker.com/r/joangi/datadoc_analyzer)**
 
 
 ## ⚒️ Installation
 
-The tools comes with two UI's. A web app built with gradio inteded to test the capabilities of the tool and to analyze a single document (you can test it in the HuggingFace Space). And, a API built with FastAPI, suited to be integrated in any ML pipeline:
+The tools come with two UIs. A web app built with Gradio intended to test the tool's capabilities and analyze a single document (you can try it in the HuggingFace Space). And a API built with FastAPI, suited to be integrated into any ML pipeline:
 
-To use this tool you need to have **python3.10**, **git**, and **pip** installed in your system.
 
-Then just:
+To use this tool, you need to have **python3.10**, **git**, and **pip** installed in your system. Then just:
+
+
 ```
 git clone https://github.com/JoanGi/DataDoc-Analyzer.git datadoc
 
 ## Enter to the created folder
 cd datadoc
 
-## Install dependencies
-## Better to do this in a virtual enviroment
+## Install dependencies (Better to do this in a virtual enviroment)
 pip install -r requirements.txt
 ```
 To deploy the web UI:
@@ -32,6 +32,16 @@ To deploy the API:
 ```
 uvicorn api:app 
 ```
+To deploy the API using the docker image:
+
+First you need to install **docker** in your sistem. Then:
+
+```
+docker pull joangi/datadoc_analyzer
+docker run --name apidataset -p 80:80 joangi/datadoc_analyzer
+```
+
+The API will be running in your localhost at port 80. (You can change the port in the command above)
 
 
 
@@ -41,9 +51,9 @@ uvicorn api:app
 
 To use this tool you need to provide your own API key form OpenAI. 
 
-Once setted, you can upload your PDF from one of the scientífic journals suited for this tool[^1]. Keep en mind, that we analyze "data papers", other publication's type present in these journals, such as "meta-analysis", will not work properly.
+Once set, you can upload your PDF from one of the scientific journals suited for this tool[^1]. Keep in mind that we analyze "data papers." Other journal publications, such as "meta-analysis" or full papers, may work adequately.
 
-At last, click in "get insights" of any tab and you will get the results together with the completeness report.
+At last, click on "get insights" of any tab, and you will get the results together with the completeness report.
 
 
 [^1]: Some journals that publish data papers:
@@ -59,7 +69,7 @@ At last, click in "get insights" of any tab and you will get the results togethe
 
  ### API
 
- The API imitates the behaivour of the tabs of the web UI, but you also have an endpoints to retrieve all the dimensions at the same time. The swagger documentation of the API, that can be tried in-situ, is published together with the app. The server will start at port 8000 by default (if not occupied by other app of your system). And the documentation will be found at http://127.0.0.1:8000/docs
+ The API imitates the behavior of the tabs of the web UI, but, in addition, you also have an endpoint to retrieve all the dimensions at the same time. The API's swagger documentation, which can be tried in situ, is published with the api. The server will start at port 8000 by default (if not occupied by another app of your system). And the documentation will be found at http://127.0.0.1:8000/docs
 
 
 <div align="center" style="width:100%">
