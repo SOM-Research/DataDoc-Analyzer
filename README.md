@@ -49,15 +49,15 @@ The API will be running in your localhost at port 80. (You can change the port i
 
 ### Web UI
 
-To use this tool you need to provide your own API key form OpenAI (Not needed during the review process). 
+To use this tool, you need to provide your own API key from OpenAI (Not needed during the review process). 
 
-Once set, you can upload your PDF from one of the scientific journals suited for this tool[^1]. Keep in mind that we analyze "data papers." Other journal publications, such as "meta-analysis" or full papers, may work adequately.
+Once set, you can upload your PDF from one of the scientific journals suited for this tool[^1]. Keep in mind that we analyze “data papers.” Other journal publications, such as “meta-analysis” or full papers, may not work adequately.
 
-At last, click on "get insights" of any tab, and you will get the results together with the completeness report.
+At last, click on “get insights” of any tab, and you will get the results together with the completeness report.
 
 
 [^1]: Some journals that publish data papers:
- **[Nature's Scientific Data](https://www.nature.com/sdata/)**, **[Data-in-Brief](https://www.data-in-brief.com)**, **[Geoscience Data Journal](https://rmets.onlinelibrary.wiley.com/journal/20496060)** etc... Here you have a **[complete list](https://zenodo.org/record/7082126#.ZDaf-OxBz0p)** of data journals suitable to be analyzed with this tool
+ **[Nature's Scientific Data](https://www.nature.com/sdata/)**, **[Data-in-Brief](https://www.data-in-brief.com)**, **[Geoscience Data Journal](https://rmets.onlinelibrary.wiley.com/journal/20496060)** etc... Here you have a **[complete list](https://zenodo.org/record/7082126#.ZDaf-OxBz0p)** of data journals suitable to be analyzed with this tool.
 
  <div align="center" style="width:100%">
 
@@ -69,7 +69,7 @@ At last, click on "get insights" of any tab, and you will get the results togeth
 
  ### API
 
- The API imitates the behavior of the tabs of the web UI, but, in addition, you also have an endpoint to retrieve all the dimensions at the same time. The API's swagger documentation, which can be tried in situ, is published with the api. The server will start at port 8000 by default (if not occupied by another app of your system). And the documentation will be found at http://127.0.0.1:8000/docs
+ The API imitates the behavior of the tabs of the web UI, but, in addition, you also have an endpoint to retrieve all the dimensions at the same time. The API's swagger documentation, which can be tested in situ, is published together along the API. The server will start at port 8000 by default (if not occupied by another app of your system). And the documentation will be found at http://127.0.0.1:8000/docs
 
 
 <div align="center" style="width:100%">
