@@ -9,7 +9,7 @@ Here you have a **[complete list](https://zenodo.org/record/7082126#.ZDaf-OxBz0p
 
 ## ⚒️ Installation
 
-The tools come with two UIs. A web app built with Gradio intended to test the tool's capabilities and analyze a single document (you can try it in the HuggingFace Space). And a API built with FastAPI, suited to be integrated into any ML pipeline:
+The tools come with two UIs. A web app built with Gradio intended to test the tool's capabilities and analyze a single document (you can try it in the **[HuggingFace Space](https://huggingface.co/spaces/JoanGiner/DataDoc_Analyzer)**). And a API built with FastAPI, suited to be integrated into any ML pipeline:
 
 
 To use this tool, you need to have **python3.10**, **git**, and **pip** installed in your system. Then just:
