@@ -16,7 +16,7 @@ To use this tool, you need to have **python3.10**, **git**, and **pip** installe
 
 
 ```
-git clone https://github.com/JoanGi/DataDoc-Analyzer.git datadoc
+git clone https://github.com/SOM-Research/DataDoc-Analyzer.git datadoc
 
 ## Enter to the created folder
 cd datadoc
