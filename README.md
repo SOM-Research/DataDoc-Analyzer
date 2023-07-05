@@ -39,6 +39,7 @@ First you need to install **docker** in your sistem. Then:
 ```
 docker pull joangi/datadoc_analyzer
 docker run --name apidataset -p 80:80 joangi/datadoc_analyzer
+docker exec apidataset apt -y install default-jre 
 ```
 
 The API will be running in your localhost at port 80. (You can change the port in the command above)
