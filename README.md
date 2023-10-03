@@ -50,7 +50,7 @@ The API will be running in your localhost at port 80. (You can change the port i
 
 ### Web UI
 
-To use this tool, you need to provide your own API key from OpenAI (Not needed during the review process). 
+To use this tool, you need to provide your own API key from OpenAI. 
 
 Once set, you can upload your PDF from one of the scientific journals suited for this tool[^1]. Keep in mind that we analyze “data papers.” Other journal publications, such as “meta-analysis” or full papers, may not work adequately.
 
