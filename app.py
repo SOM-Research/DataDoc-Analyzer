@@ -21,8 +21,8 @@ from src.extractor import Extractor
 load_dotenv()
 
 ## You api key from vendors or hugginface
-openai.api_key=os.getenv("OPEN_AI_API_KEY")
-LLMClient = OpenAI(model_name='text-davinci-003', openai_api_key=openai.api_key,temperature=0)
+#openai.api_key=os.getenv("OPEN_AI_API_KEY")
+#LLMClient = OpenAI(model_name='text-davinci-003', openai_api_key=openai.api_key,temperature=0)
 extractor = Extractor()
 
 # Define function to handle the Gradio interface 
@@ -51,6 +51,10 @@ async def extraction(input_file, apikey, dimension):
     return results, completeness_report
 
 async def ui_extraction(input_file, apikey, dimension):
+        if (input_file == None):
+            raise gr.Error("Please upload a data paper")
+        if (input_file.name.split(".")[-1] != "pdf"):
+            raise gr.Error("This is not a data paper!, please upload it in .pdf format")
         file_name = input_file.name.split("/")[-1]
         results, completeness_report = await extractor.extraction(file_name, input_file.name, apikey, dimension)
         # Build results in the correct format for the Gradio front-end
@@ -154,7 +158,7 @@ with gr.Blocks(theme=gr.themes.Soft(), css=css) as demo:
 
          """)
         with gr.Column():
-            apikey_elem = gr.Text(label="OpenAI API key (Not needed during review)")
+            apikey_elem = gr.Text(label="OpenAI API key", type="password")
          #   gr.Markdown(""" 
          #                   <h3> Improving your data and assesing your dataset documentation </h3>
          #                   The generated warning also allows you quicly check the completeness of the documentation, and spotting gaps in the document
@@ -261,5 +265,5 @@ with gr.Blocks(theme=gr.themes.Soft(), css=css) as demo:
    
     # Run the app
     #demo.queue(concurrency_count=5,max_size=20).launch()
-    demo.launch(share=False,show_api=False,auth=("CIKM2023", "demodemo"))
+    demo.launch(share=False,show_api=False)
         

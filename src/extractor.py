@@ -65,6 +65,7 @@ class Extractor:
     
     # Extract text from PDF file using SCIPDF and Gorbid service (you need gorbid to use it)
     def extract_text_from_pdf(self, file_path):
+
         article_dict = scipdf.parse_pdf_to_dict(file_path, soup=True,return_coordinates=False, grobid_url="https://kermitt2-grobid.hf.space") # return dictionary
         print("PDF parsed")
         finaltext = article_dict['title'] + " \n\n " + article_dict['authors'] + " \n\n Abstract: " + article_dict['abstract'] + " \n\n "
@@ -108,10 +109,9 @@ class Extractor:
     async def prepare_data(self, file_name, file_path, chain_table, apikey):
         # Process text and get the embeddings
         vectorspath = "./vectors/"+file_name
-        if not apikey:
-            apikey = openai.api_key
-            gr.Error("Please set your api key")
-        embeddings = OpenAIEmbeddings(openai_api_key=openai.api_key)
+
+            #apikey = openai.api_key
+        embeddings = OpenAIEmbeddings(openai_api_key=apikey)
         if os.path.isfile(vectorspath+"/index.faiss"):
 
             # file exists
@@ -146,9 +146,6 @@ class Extractor:
         return docsearch
 
     def build_chains(self, apikey):
-        if not apikey:
-            apikey = openai.api_key
-            gr.Error("Please set your api key")
         LLMClient = OpenAI(model_name='text-davinci-003',openai_api_key=apikey,temperature=0)
         ## In-context prompt
         prompt_template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
