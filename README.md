@@ -83,7 +83,7 @@ At last, click on “get insights” of any tab, and you will get the results to
 
 ## 📚 Background research
 
-The tool will be presented at the [32nd ACM International Conference on Information and Knowledge Management](https://uobevents.eventsair.com/cikm2023/) in October '23. Preprint of the publication soon. Meanwhile, check this [short video presenting the tool](https://www.youtube.com/watch?v=bffVXA5D2-8)
+The tool has been presented at the [32nd ACM International Conference on Information and Knowledge Management](https://uobevents.eventsair.com/cikm2023/) in October '23 ([tool's publication](https://dl.acm.org/doi/10.1145/3583780.3614737)). Also, you can check this [short video presenting the tool](https://www.youtube.com/watch?v=bffVXA5D2-8)
 
 
 
