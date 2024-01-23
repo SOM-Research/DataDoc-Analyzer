@@ -1,12 +1,12 @@
 import openai
 import gradio as gr
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter, RecursiveCharacterTextSplitter
 from langchain.vectorstores.faiss import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chains import LLMChain
-from langchain.llms import OpenAI
-from langchain import PromptTemplate
+from langchain_community.llms import OpenAI
+from langchain.prompts import PromptTemplate
 from langchain.docstore.document import Document
 import pandas as pd
 import os
@@ -24,7 +24,7 @@ load_dotenv()
 #openai.api_key=os.getenv("OPEN_AI_API_KEY")
 #LLMClient = OpenAI(model_name='text-davinci-003', openai_api_key=openai.api_key,temperature=0)
 extractor = Extractor()
-
+print(os.getenv("OPEN_AI_API_KEY"))
 # Define function to handle the Gradio interface 
 async def extraction(input_file, apikey, dimension):
     # Build the chains
@@ -55,6 +55,8 @@ async def ui_extraction(input_file, apikey, dimension):
             raise gr.Error("Please upload a data paper")
         if (input_file.name.split(".")[-1] != "pdf"):
             raise gr.Error("This is not a data paper!, please upload it in .pdf format")
+        if (len(apikey) == 0):
+          raise gr.Error("Please inform your OpenAI Apikey")
         file_name = input_file.name.split("/")[-1]
         results, completeness_report = await extractor.extraction(file_name, input_file.name, apikey, dimension)
         # Build results in the correct format for the Gradio front-end

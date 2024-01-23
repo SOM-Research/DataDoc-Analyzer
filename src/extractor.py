@@ -1,12 +1,14 @@
 import openai
 import gradio as gr
-from langchain.embeddings import OpenAIEmbeddings
+#from langchain.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter, RecursiveCharacterTextSplitter
 from langchain.vectorstores.faiss import FAISS
 from langchain.chains.question_answering import load_qa_chain
 from langchain.chains import LLMChain
-from langchain.llms import OpenAI
-from langchain import PromptTemplate
+from langchain_community.llms import OpenAI
+#from langchain import PromptTemplate
+from langchain.prompts import PromptTemplate
 from langchain.docstore.document import Document
 import pandas as pd
 import os
@@ -93,7 +95,7 @@ class Extractor:
             #table_texts.append(query + " "+ result['text'])
         table_texts = await asyncio.gather(*table_texts)
         for table in table_texts:
-            docsearch.add_texts(table[1])
+            docsearch.add_texts(table)
         return docsearch
 
     def extract_text_clean(self, file_name, file_path):
@@ -142,11 +144,19 @@ class Extractor:
             
             # Save the index locally
             FAISS.save_local(docsearch, "./vectors/"+file_name)
+
+        try:
+            result = docsearch.similarity_search("trial query")
+        except Exception as e:
+            print(e)
+            raise gr.Error("Your OpenAI Apikey is not valid")
+
     
         return docsearch
 
     def build_chains(self, apikey):
-        LLMClient = OpenAI(model_name='text-davinci-003',openai_api_key=apikey,temperature=0)
+        LLMClient = OpenAI(model_name='gpt-3.5-turbo-instruct',openai_api_key=apikey,temperature=0)
+        
         ## In-context prompt
         prompt_template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
         Question: {question}
@@ -183,14 +193,14 @@ class Extractor:
 
     async def async_table_generate(self, docs,table,chain):
 
-        resp = await chain.arun({"context": docs, "table": table})
+        resp = await chain.ainvoke({"context": docs, "table": table})
         #resp = "Description of the team, the type, and the demographics information, Description of the team, the type, and the demographics information"
         return resp
 
     async def async_generate(self, dimension, docs,question,chain):
-        resp = await chain.arun({"input_documents": docs, "question": question})
+        resp = await chain.ainvoke({"input_documents": docs, "question": question})
         #resp = "Description of the team, the type, and the demographics information, Description of the team, the type, and the demographics information"
-        return [dimension, resp]
+        return [dimension, resp['output_text']]
 
     async def get_gathering_dimension(self, docsearch, incontext_prompt, retrieved_docs):
         dimensions = [
