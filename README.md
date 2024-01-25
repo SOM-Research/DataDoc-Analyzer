@@ -4,7 +4,7 @@
 
 Extract, in a structured manner, the **[general guidelines](https://knowingmachines.org/reading-list#dataset_documentation_practices)** from the ML community about dataset documentation practices from its scientific documentation. Study and analyze scientific data published in peer-review journals such as: **[Nature's Scientific Data](https://www.nature.com/sdata/)** and **[Data-in-Brief](https://www.data-in-brief.com)**. 
 
-:vhs: **Take a look to our [short video presenting the tool](https://www.youtube.com/watch?v=bffVXA5D2-8)!** :vhs:
+:vhs: **Take a look to our [short video presenting the tool](https://www.youtube.com/watch?v=bffVXA5D2-8)!** :vhs: and here you have **an example of an [study](https://github.com/SOM-Research/MLData_readiness) using DataDocAnalyzer** to extract the data from data papers.
 
 Here you have a **[complete list](https://zenodo.org/record/7082126#.ZDaf-OxBz0p)** of data journals suitable to be analyzed with this tool. Test the web UI of the tool in the following **[HuggingFace Space](https://huggingface.co/spaces/JoanGiner/DataDoc_Analyzer)**, and the API using our **[Docker image](https://hub.docker.com/r/joangi/datadoc_analyzer)**
 
